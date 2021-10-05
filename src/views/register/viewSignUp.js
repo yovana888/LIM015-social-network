@@ -5,7 +5,7 @@ export default () => {
     viewSignUp.innerHTML = `
     <div class="column1 form-container">
                 <div class="container-logo">
-                    <img class="logo" src="../images/svg/logo.svg" alt="logo"><br>
+                    <img class="logo" src="../assets/images/svg/logo.svg" alt="logo"><br>
                 </div>
                 <br>
                 <form action="#" class="form" id="form-registro">
@@ -75,10 +75,6 @@ export default () => {
                 </div>
             </div>
     `;
-
-
-    /*     const formSignUp = viewSignUp.querySelector("#form-signUp"); */
-    /*    authSignUp(formSignUp) */
 
     return viewSignUp;
 }

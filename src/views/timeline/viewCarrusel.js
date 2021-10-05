@@ -13,29 +13,29 @@ const loadViewPopularPost = () => {
                     const cardPost = document.createElement('figure');
                     cardPost.classList.add('card-post')
                     cardPost.innerHTML = `
-            <div class="head-popularPosts">
-                <div class="imgUser">
-                    <a href="#">
-                    ${(/^(http|https):\/\/[^ "]+$/.test(element.photoUser)) ? 
-                    `<img src="${element.photoUser}" alt="" class="post-author-pic">` 
-                    : `<img src="../images/profile/${element.photoUser}" class="post-author-pic">`} 
-                    </a>
-                </div>
-                <div class="name-hours">
-                    <h5><span class="author-name"><a href="#"> ${element.nameUser} </a></span></h5>
-                    <p <span class="post-date">${element.datePost}</span> </p>
-                </div>
-                <div class="heart-number">
-                    <i class="fab fa-gratipay heart"></i>
-                    <p> ${element.arrLikes.length > 0 ? element.arrLikes.length : 0} </p>
-                </div>
-            </div>
-            <div class="text-content">
-                <p class="p-posts"> ${element.contentPost.substring(0, 55)}... </p>
-            </div>
-            <div class="box-plus">
-                <img src="images/imgPopularPosts/plus.png" alt="" class="plus">
-            </div>
+                    <div class="head-popularPosts">
+                        <div class="imgUser">
+                            <a href="#">
+                            ${(/^(http|https):\/\/[^ "]+$/.test(element.photoUser)) ? 
+                            `<img src="${element.photoUser}" alt="" class="post-author-pic">` 
+                            : `<img src="../images/profile/${element.photoUser}" class="post-author-pic">`} 
+                            </a>
+                        </div>
+                        <div class="name-hours">
+                            <h5><span class="author-name"><a href="#"> ${element.nameUser} </a></span></h5>
+                            <p <span class="post-date">${element.datePost}</span> </p>
+                        </div>
+                        <div class="heart-number">
+                            <i class="fab fa-gratipay heart"></i>
+                            <p> ${element.arrLikes.length > 0 ? element.arrLikes.length : 0} </p>
+                        </div>
+                    </div>
+                    <div class="text-content">
+                        <p class="p-posts"> ${element.contentPost.substring(0, 55)}... </p>
+                    </div>
+                    <div class="box-plus">
+                        <img src="../../assets/images/imgPopularPosts/plus.png" alt="" class="plus"  href="#seccion1">
+                    </div>
         `
         sliderPost.appendChild(cardPost);
     })

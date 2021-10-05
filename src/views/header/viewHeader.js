@@ -3,8 +3,8 @@ export const header = () => {
     const header = document.createElement('header');
     header.className = 'header';
     header.innerHTML = `        
-    <img class="logo" src="../../images/svg/logo.svg" alt="logo">
-    <img class="icon-logo" src="../../images/svg/favicon.svg" alt="logo">
+    <img class="logo" src="../../assets/images/svg/logo.svg" alt="logo">
+    <img class="icon-logo" src="../../assets/images/svg/favicon.svg" alt="logo">
     
     <section class="input-search">
         <input type="search" name="" id="search" autocomplete="off">
@@ -34,11 +34,11 @@ export const header = () => {
         const search = inputSearch.value.toLowerCase();
         let resultSearch = searchResult(allUsers, search);
         const htmlResultSearch = resultSearch.map(user => `<li> <span class="link-user" data-id="${user.idUser}"> ${user.nameUser} </span> </li> `)
-        search != ''? displayResults(htmlResultSearch) : ulResulSearch.innerHTML = "";
+        search != '' ? displayResults(htmlResultSearch) : ulResulSearch.innerHTML = "";
     });
 
     const searchResult = (allUsers, search) => allUsers.filter(user => user.nameUser.toLowerCase().includes(search)) //user.nameUser.toLowerCase().indexOf(search.toLowerCase()) > -1
-    
+
     const displayResults = (resultSearch) => {
         const html = resultSearch.length > 0 ? resultSearch.join('') : "";
         ulResulSearch.innerHTML = html;
