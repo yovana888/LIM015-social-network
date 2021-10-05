@@ -24,8 +24,10 @@ const loadViewCategory = async() => {
     allCategoriesCourse.forEach(element => {
         const figureCategory = document.createElement('figure');
         figureCategory.classList.add('category');
+        /*  <img class="categoryIcon" src="../../images/svg/categorias/${ element.imagen }" alt="logo-categories> */
         figureCategory.innerHTML = `
-        <img src="../../assets/images/svg/categorias/${ element.imagen }" alt="logo-categories">
+
+        <img class="categoryIcon categoryName" src="../../assets/images/svg/categorias/${ element.imagen }" alt="logo-categories" data-id=${element.idCategory} data-total=${element.totalPosts}>
         <div class="content-category">
             <span class="text-category categoryName" id="textCategory-${element.idCategory}" data-id=${element.idCategory} data-total=${element.totalPosts}> ${ element.nameCategory } </span>
             <p class="text-muted" id="category-${element.idCategory}">  ${ element.totalPosts } post</p>
@@ -37,12 +39,14 @@ const loadViewCategory = async() => {
 const addEventShowCategories = () => {
     const spanAllCategories = document.querySelector('#span-all-categories');
     spanAllCategories.addEventListener('click', () => {
-        getObjectAllPosts(); //Entonces volvemos a Cargar Todos los Posts
+        getObjectAllPosts(); //Entonces volvemos a Cargar Todos los Posts - 'Ver Todos'
+        console.log(spanAllCategories, 'spanAllCategories preueba 1')
     });
 
     const allCategoriesName = document.querySelectorAll('.categoryName');
     allCategoriesName.forEach(span => {
         span.addEventListener('click', async(e) => {
+            console.log(span, 'event click')
             const idSpanCategory = e.target.dataset.id;
             const totalPosts = e.target.dataset.total;
             const spanCategory = document.querySelector('#textCategory-' + idSpanCategory);
@@ -83,7 +87,6 @@ const addEventShowCategories = () => {
                             alerts('info', 'Los ' + objectPosts.length + ' posts son privados.')
                         } else {
                             const totalPrivate = parseInt(totalPosts) - dataPublic.length;
-                            console.log(totalPrivate);
                             if (totalPrivate > 0) { //esto quiere decir que total de posts puede que halla mas de privado.
                                 alerts('info', 'No se mostraran ' + totalPrivate + ' por que son privados');
                             }

@@ -6,19 +6,17 @@ const topPopularPosts = () => {
 }
 
 const loadViewPopularPost = () => {
-        const orderedObject = topPopularPosts()
-        const sliderPost = document.querySelector('.slider');
+    const orderedObject = topPopularPosts()
+    const sliderPost = document.querySelector('.slider');
 
-        orderedObject.forEach(element => {
-                    const cardPost = document.createElement('figure');
-                    cardPost.classList.add('card-post')
-                    cardPost.innerHTML = `
+    orderedObject.forEach(element => {
+        const cardPost = document.createElement('figure');
+        cardPost.classList.add('card-post')
+        cardPost.innerHTML = `
                     <div class="head-popularPosts">
                         <div class="imgUser">
                             <a href="#">
-                            ${(/^(http|https):\/\/[^ "]+$/.test(element.photoUser)) ? 
-                            `<img src="${element.photoUser}" alt="" class="post-author-pic">` 
-                            : `<img src="../images/profile/${element.photoUser}" class="post-author-pic">`} 
+                            <img src="${element.photoUser}" alt="" class="post-author-pic">
                             </a>
                         </div>
                         <div class="name-hours">
@@ -35,11 +33,10 @@ const loadViewPopularPost = () => {
                     </div>
                     <div class="box-plus">
                         <img src="../../assets/images/imgPopularPosts/plus.png" alt="" class="plus"  href="#seccion1">
-                    </div>
-        `
+                    </div>`
         sliderPost.appendChild(cardPost);
     })
     return sliderPost;
 }
 
-export { loadViewPopularPost  }
+export { loadViewPopularPost }
