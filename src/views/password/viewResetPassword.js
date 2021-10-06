@@ -4,10 +4,10 @@ export default () => {
     viewLogin.innerHTML = `
     <div class="main-box">
         <div class="box-brand">
-            <img src="../assets/images/svg/logo.svg" alt="" class="logoPassword"> 
+            <img src="../src/assets/images/svg/logo.svg" alt="" class="logoPassword"> 
         </div> 
         <div class="box-img">
-            <img src="../assets/images/svg/PasswordChange.png" alt="" class="imgPassword"> 
+            <img src="../src/assets/images/svg/PasswordChange.png" alt="" class="imgPassword"> 
         </div> 
         
         <div class="description">
