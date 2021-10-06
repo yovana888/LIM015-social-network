@@ -1,10 +1,12 @@
 import { addEventLinkUser } from "../timeline/eventsTimeline.js";
+import { signOut } from '../../db/firebase-auth.js';
+
 export const header = () => {
     const header = document.createElement('header');
     header.className = 'header';
     header.innerHTML = `        
-    <a href="#/timeline"> <img class="logo" src="../src/images/svg/logo.svg" alt="logo"/> </a>
-    <a href="#/timeline"> <img class="icon-logo" src="../src/images/svg/favicon.svg" alt="logo"> </a>
+    <a href="#/timeline"> <img class="logo" src="../../assets/images/svg/logo.svg" alt="logo"/> </a>
+    <a href="#/timeline"> <img class="icon-logo" src="../../assets/images/svg/favicon.svg" alt="logo"> </a>
     
     <section class="input-search">
         <input type="search" name="" id="search" autocomplete="off">
@@ -26,7 +28,8 @@ export const header = () => {
         </section>
     </div>
     `;
-    /* Searcher */
+    // ------------------------------ Eventos para Search-----------------------------------------------
+
     const inputSearch = header.querySelector('#search');
     const ulResulSearch = header.querySelector('#result-search');
     const allUsers = JSON.parse(window.localStorage.getItem('allUsers')); //extraemos de local viewHeaderUser Linea 21    
@@ -34,15 +37,28 @@ export const header = () => {
         const search = inputSearch.value.toLowerCase();
         let resultSearch = searchResult(allUsers, search);
         const htmlResultSearch = resultSearch.map(user => `<li> <span class="link-user" data-id="${user.idUser}"> ${user.nameUser} </span> </li> `)
-        search != ''? displayResults(htmlResultSearch) : ulResulSearch.innerHTML = "";
+        search != '' ? displayResults(htmlResultSearch) : ulResulSearch.innerHTML = "";
     });
 
     const searchResult = (allUsers, search) => allUsers.filter(user => user.nameUser.toLowerCase().includes(search)) //user.nameUser.toLowerCase().indexOf(search.toLowerCase()) > -1
-    
+
     const displayResults = (resultSearch) => {
         const html = resultSearch.length > 0 ? resultSearch.join('') : "";
         ulResulSearch.innerHTML = html;
         addEventLinkUser();
     }
+
+    // ------------------------------ Evento Cerrar Sesión-----------------------------------------------
+
+    const btnSalir = header.querySelector('#logout');
+    btnSalir.addEventListener('click', () => {
+        signOut().then(() => {
+            document.querySelector('#div-body').classList.remove('bodyBackground');
+            window.location.hash = '#/login';
+        }).catch((error) => {
+            alert(error)
+        });
+    });
+
     return header;
 }
