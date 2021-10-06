@@ -1,4 +1,4 @@
-const loadViewModalForm = () => {
+const loadViewModalForm = () => {/*Modal principal de crear post*/
     const viewModal = document.querySelector('#modal-contenido');
     viewModal.innerHTML = `
         <section class="content-modal">

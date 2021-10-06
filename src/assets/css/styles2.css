@@ -952,7 +952,6 @@ img {
     display: flex;
     justify-content: flex-end;
     align-self: flex-end;
-    justify-content: flex-end;
     position: absolute;
     margin-top: 15%;
 }

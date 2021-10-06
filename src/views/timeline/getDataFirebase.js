@@ -1,5 +1,5 @@
 import { alerts } from "../../lib/alerts.js";
-import { getAllUsers, getAllCategories, getAllPosts, getPostByCategory } from "../../db/firestore.js";
+import { getAllUsers, getAllCategories, getAllPosts } from "../../db/firestore.js";
 
 
 // --------------------------------- Obtener todos los Usuarios ---------------------------
@@ -44,11 +44,9 @@ const getObjectPosts = async(idCategory, idUser) => {
     let objectPosts = [];
     const allUsersPosts = await allUsers().then((response) => response);
     const allCategoriesCourses = await allCategories().then((response) => response);
-    const queryFirestore = (idCategory != "all") ? getPostByCategory(idCategory) : getAllPosts();
-    const idUserAuth = localStorage.getItem('idUserRedirecionar');
-    return queryFirestore.then((response) => {
+    return getAllPosts().then((response) => {
         response.forEach((doc) => {
-            const userPost = allUsersPosts.find((element) => element.idUser === doc.data().idUser);
+            const userPost = allUsersPosts.find((element) => element.idUser === doc.data().idUser); //doc.data().idUser Usuario que publico
             const categoryprueba = allCategoriesCourses.find((element) => element.idCategory == doc.data().idCategory);
 
             objectPosts.push({
@@ -58,7 +56,6 @@ const getObjectPosts = async(idCategory, idUser) => {
                 photoUser: userPost.photoUser,
                 contentPost: doc.data().contentPost,
                 datePost: doc.data().datePost.toDate().toDateString(),
-                dateprueba: doc.data().datePost.toDate(),
                 nameImage: doc.data().nameImage,
                 arrLikes: doc.data().arrLikes,
                 arrComments: doc.data().arrComments,
@@ -70,7 +67,10 @@ const getObjectPosts = async(idCategory, idUser) => {
             });
         });
         if (idUser != "all") {
-            objectPosts = objectPosts.filter(post => post.idUser == idUserAuth);
+            objectPosts = objectPosts.filter(post => post.idUser == idUser); //Solo los post de un usuario
+        }
+        if (idCategory != "all") {
+            objectPosts = objectPosts.filter(post => post.idCategory == idCategory); //Solo los post de una categoria determinada
         }
         return objectPosts;
     });

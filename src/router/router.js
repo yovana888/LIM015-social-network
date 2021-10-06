@@ -18,7 +18,7 @@ const changeView = async(route) => {
         case '#/login':
             {
                 const viewLogin = containerMain.appendChild(components.login());
-                window.localStorage.removeItem('iduser');
+                window.localStorage.removeItem('iduser'); //Elimina el iduser almacenado en LocalStorage para Asegurarnos que no pueda ingresar al timeline sin loguearse
                 window.localStorage.removeItem('idUserRedirecionar');
                 addEventsLogin();
                 return viewLogin;
@@ -38,12 +38,11 @@ const changeView = async(route) => {
             }
         case '#/timeline':
             {
-                window.localStorage.removeItem('idUserRedirecionar');
-                const verificar = localStorage.getItem('iduser');
-                if (verificar != null || verificar != undefined) {
+                const verificar = localStorage.getItem('iduser'); //Aseguramos que no pueda ingresar al timeline sin loguearse
+                if (verificar != null || verificar != undefined) { 
                     const viewTimeLine = containerMain.appendChild(components.timeLine());
-                    const firstChild = viewTimeLine.firstChild;
-                    viewTimeLine.insertBefore(components.header(), firstChild);
+                    const firstChild = viewTimeLine.firstChild; //Buscamos el primer hijo del viewTimeline
+                    viewTimeLine.insertBefore(await components.header(), firstChild); //Agrega al header antes del primer hijo de viewTimelime
                     await loadComponetsTimeLine(); /*Agrega toda la info de fb al Timeline*/
                     loadEventsDomTimeLine(); /*Agrega todos los eventos al Timeline*/
                     return viewTimeLine;
@@ -58,7 +57,7 @@ const changeView = async(route) => {
             {
                 const viewProfile = containerMain.appendChild(components.profile());
                 const firstChild = viewProfile.firstChild;
-                viewProfile.insertBefore(components.header(), firstChild);
+                viewProfile.insertBefore(await components.header(), firstChild);
                 await loadComponentsProfile(); /*Agrega toda la info de fb al Timeline-profile*/
                 loadEventsDomTimeLine(); /*Agrega todos los eventos del Timeline*/
                 return viewProfile;

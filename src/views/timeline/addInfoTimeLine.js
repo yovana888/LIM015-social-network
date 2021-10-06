@@ -21,17 +21,17 @@ const loadViewHeaderUser = async() => {
 
 //--------------------------------- Obtener Data para Renderizar Todos los Posts o por Filtro -------------------------------------------------------------
 
-const loadAllPosts = async(idCategory, idUser) => {
+const loadAllPosts = async(idCategory, idUser) => {//Extrae la data publica o privada 
     const objectDataPosts = await getObjectPosts(idCategory, idUser).then((response) => response);
     const idUserAuth = localStorage.getItem('iduser');
     const dataPublic = objectDataPosts.filter((element) => element.publicPosts == "true" || element.idUser == idUserAuth);
-    const totalPrivate = objectDataPosts.length - dataPublic.length;
+    const totalPostsPrivate = objectDataPosts.length - dataPublic.length; //total post privados 
     const containerPost = document.querySelector("#container-posts");
     containerPost.innerHTML = "";
     loadViewPost(dataPublic);
 
-    if (totalPrivate > 0 && idCategory != "all") {
-        alerts('info', 'No se mostraran ' + totalPrivate + ' por que son privados')
+    if (totalPostsPrivate > 0 && idCategory != "all") {
+        alerts('info', 'No se mostraran ' + totalPostsPrivate + ' por que son privados') //Alerta en las categorías 
     }
 };
 
@@ -39,7 +39,7 @@ const loadAllPosts = async(idCategory, idUser) => {
 
 const loadViewPost = (dataPublic) => {
         const containerPost = document.querySelector("#container-posts");
-        const infoUserAuth = JSON.parse(window.localStorage.getItem('infouser')); //linea 13
+        const infoUserAuth = JSON.parse(window.localStorage.getItem('infouser')); //linea 13 parseamos el objeto para guardarlo en LocalStorage
         const idUserAuth = localStorage.getItem('iduser');
 
         if (dataPublic.length == 0 || dataPublic == undefined) {
@@ -162,7 +162,7 @@ const loadViewPopularPost = async () => {
 }
 
 // ------------------------------ Renderizar Text Area Modal-----------------------------
-const loadTextareaPosts = async() => {
+const loadTextareaPosts = async() => {//Renderizar información del usuario(nombre, imagen)
     const userPost = document.querySelector('.user-info-textarea');
     const placeholderTextarea = document.querySelector('.textarea-post');
     const idUserAuth = localStorage.getItem('iduser'); //Esto vien de la linea 58 del archivo eventLogin OBTENER EL ID USER
