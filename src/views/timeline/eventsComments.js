@@ -1,5 +1,0 @@
-const showComments = () => {
-
-}
-
-export { showComments }

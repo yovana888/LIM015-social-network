@@ -1,4 +1,4 @@
-const loadEditModal = () => {
+const loadViewModalEditProfile = () => {
     return `
     <section class="content-modal content-modal-edit-profile">
         <section class="head-modal">
@@ -31,12 +31,14 @@ const loadEditModal = () => {
                 </section>
 
                 <section class="form-group">
+                    <i class="fas fa-user"></i>
                     <label class="form-label"> Nombre Completo </label>
                     <input id="name-edit" type="text" class="form-input" autocomplete="off">
                     <span id="msg-nameUser" class="msg"></span>
                 </section>
 
                 <section class="form-group">
+                    <i class="fas fa-envelope"></i>
                     <label class="form-label">Correo Electrónico</label>
                     <input id="email-edit" type="email" class="form-input" disabled>
                 </section>
@@ -48,7 +50,7 @@ const loadEditModal = () => {
 
                 <section class="group-btn-edit-profile">
                     <button type="reset" id="btn-cancel-edit-profile" class="form-submit btn btn-default"> Borrar todo </button>
-                    <button type="submit" id="btn-edit-profile" class="form-submit btn btn-info"> Guardar Cambios</button>
+                    <button type="submit" id="btn-edit-profile" class="form-submit btn btn-secondary"> Guardar Cambios</button>
                 </section>
                 
             </form>
@@ -57,4 +59,4 @@ const loadEditModal = () => {
     `;
 }
 
-export { loadEditModal }
+export { loadViewModalEditProfile }

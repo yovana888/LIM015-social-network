@@ -1,33 +1,21 @@
-import {
-    getCategory,
-    savePost,
-    datePost,
-    deletePostFs,
-    updatePost,
-    updateCategory,
-    getPost,
-} from "../../db/firestore.js";
-import { saveImageFile, getPhotoURL } from "../../db/storage.js";
+import { uploadImage, updateTotalCategory } from "../../lib/utils.js";
 import { alerts, btnProcess } from "../../lib/alerts.js";
-import { loadViewPost } from "./viewPosts.js";
+import { loadViewPost } from "./addInfoTimeLine.js";
+import { savePost, datePost, deletePostFs, updatePost, getPost } from "../../db/firestore.js";
+import { addEventLike, addEventComments, addEventLinkUser } from "./eventsTimeline.js"
 
-//Agregamos evento para enviar Post
+
+// ------------------------------ Evento al hacer Submit en el Modal --------------------------------------
+
 const addEventFormPost = () => {
     const formPost = document.querySelector("#form-create-post");
-    const inputIdPost = document.querySelector("#input-idpost");
-    const idUserAuth = localStorage.getItem("iduser"); //Esto vien de la linea 58 del archivo eventLogin OBTENER EL ID USER
-    const selectCategory = document.querySelector("#select-categories");
     const inputTextarea = document.querySelector("#post-user");
-    const imageUpload = document.querySelector("#file-input");
-    const sectionNameImgUpload = document.querySelector(".name-image-upload");
+    const selectCategory = document.querySelector("#select-categories");
     const selectPublic = document.querySelector("#select-public");
-
+    const inputIdPost = document.querySelector("#input-idpost");
+    const idUserAuth = localStorage.getItem('iduser');
     /** Evento en caso de Cambio de Imagen**/
-    imageUpload.addEventListener("change", () => {
-        if (imageUpload.files && imageUpload.files[0]) {
-            sectionNameImgUpload.innerHTML = `<span> ${imageUpload.files[0].name} </span>`;
-        }
-    });
+
 
     /** Evento para enviar Formulario**/
     formPost.addEventListener("submit", async(e) => {
@@ -39,8 +27,7 @@ const addEventFormPost = () => {
             idCategory: selectCategory.value,
             publicPosts: selectPublic.value,
         };
-        //Lo siguiente es verificar si es guardar un nuevo post o editar,
-        //si el Input del IdPost es Vacio, entonces es crear
+        //Si el Input del IdPost es Vacio, entonces es crear
         if (inputIdPost.value == "") {
             //retorna un array con la info para la imagen
             const dataUploadImage = await uploadImage("create");
@@ -61,14 +48,13 @@ const addEventFormPost = () => {
     });
 };
 
-//Evento Eliminar en cada Post
+
+// ------------------------------ Evento al hacer Click en ek btn de Eliminar (Tachito) --------------------------------------
 
 const addEventDeletePost = () => {
     const btnsDelete = document.querySelectorAll(".btn-delete");
+    const btnCerrarModal = document.querySelector(".btn-cerrar-modal-delete"); /* cerrar */
     const modalDelete = document.querySelector(".modal-delete");
-    const btnCerrarModal = document.querySelector(
-        ".btn-cerrar-modal-delete"
-    ); /* cerrar */
     btnCerrarModal.addEventListener("click", () => {
         modalDelete.classList.remove("revelar");
     });
@@ -89,9 +75,7 @@ const addEventDeletePost = () => {
         confirmDelete.addEventListener("click", () => {
             deletePostFs(idPosts)
                 .then(() => {
-                    const inputCategory = document.querySelector(
-                        "#input-category-" + idPosts
-                    );
+                    const inputCategory = document.querySelector("#input-category-" + idPosts);
                     nodoPadre.removeChild(nodoHijo);
                     modalDelete.classList.remove("revelar"); //oculta el modal
                     updateTotalCategory(inputCategory.value, "delete");
@@ -105,13 +89,13 @@ const addEventDeletePost = () => {
     }
 };
 
-//Evento Editar en cada Post
+// ------------------------------ Evento al hacer Click en ek btn de Editar (Lapiz) --------------------------------------
 
 const addEventEditPost = () => {
     const btnsEdit = document.querySelectorAll(".btn-edit");
     const modal = document.querySelector(".modal");
-    const btnModal = document.querySelector("#share-post"); /* abrir */
     const titleModal = document.querySelector("#title-modal");
+    const btnModal = document.querySelector("#share-post");
 
     btnsEdit.forEach((btn) => {
         btn.addEventListener("click", (e) => {
@@ -124,20 +108,15 @@ const addEventEditPost = () => {
     });
 
     async function loadDataPosts(idPost) {
-        const dataPost = await getPost(idPost).then((response) => response.data());
-        const selectCategory = document.querySelector("#select-categories");
         const inputTextarea = document.querySelector("#post-user");
+        const sectionNameImgUpload = document.querySelector(".name-image-upload");
+        const selectCategory = document.querySelector("#select-categories");
+        const selectPublic = document.querySelector("#select-public");
         const inputIdPost = document.querySelector("#input-idpost");
         const inputUrl = document.querySelector("#input-urlpost");
-        const sectionNameImgUpload = document.querySelector(".name-image-upload");
         const inputNameImage = document.querySelector("#input-nameImage");
-        const selectPublic = document.querySelector("#select-public");
-
-        if (dataPost.publicPosts == "true") {
-            selectPublic.value = "true";
-        } else {
-            selectPublic.value = "false";
-        }
+        const dataPost = await getPost(idPost).then((response) => response.data());
+        (dataPost.publicPosts == "true") ? selectPublic.value = "true": selectPublic.value = "false";
 
         inputIdPost.value = idPost;
         selectCategory.value = dataPost.idCategory;
@@ -148,21 +127,19 @@ const addEventEditPost = () => {
     }
 };
 
-//Funcion Para Crear y Guardar Post en Firestore
+// ------------------------------ Evento para guardar Post en Firestore y Renderizar en la DOM --------------------------------------
 
 const createObjectPost = (object) => {
-    const modal = document.querySelector(".modal");
-    const idUserAuth = localStorage.getItem("iduser"); //Esto vien de la linea 58 del archivo eventLogin OBTENER EL ID USER
-    const infouser = JSON.parse(window.localStorage.getItem("infouser"));
     const selectCategory = document.querySelector("#select-categories");
     const textSelect = selectCategory.options[selectCategory.selectedIndex].text;
-    const objectAllPosts = JSON.parse(window.localStorage.getItem("allPosts"));
+    const infouser = JSON.parse(window.localStorage.getItem("infouser"));
+    const modal = document.querySelector(".modal");
     savePost(object)
         .then((res) => {
             // Necesitamos el res para obtener el id generado en el firestore
-            const objectPost = {
+            const newObjectPost = [{
                 idPost: res.id,
-                idUser: idUserAuth,
+                idUser: object.idUser,
                 nameUser: infouser.nameuser,
                 photoUser: infouser.photouser,
                 contentPost: object.contentPost,
@@ -175,18 +152,18 @@ const createObjectPost = (object) => {
                 idCategory: object.idCategory,
                 nameCategory: textSelect,
                 urlImage: object.urlImage,
-            };
-            objectAllPosts.push(objectPost);
+            }];
 
-            window.localStorage.setItem("allPosts", JSON.stringify(objectAllPosts)); //Agreamos al Local, con el nuevo Obj
-            const arrayObjectPost = [objectPost]; //agregamos el obj en un array para darselo a la funcion loadView, ya que este recibe un array
-            loadViewPost(arrayObjectPost); //Rendereizamos el Post en la DOM, funcion esta en viewPost linea 37
+            loadViewPost(newObjectPost); //Rendereizamos el Post en la DOM, funcion esta en viewPost linea 37
             addEventEditPost();
             addEventDeletePost(); //agrego de nuevo los eventos
+            addEventLike();
+            addEventComments();
+            addEventLinkUser();
             modal.classList.remove("revelar"); //Cierra el modal?
             btnProcess(false);
+            updateTotalCategory(selectCategory.value, "create"); //editamos el total de Categorias
             alerts("success", "Post Publicado");
-            updateTotalCategory(selectCategory.value, "create");
         })
         .catch((error) => {
             btnProcess(false);
@@ -194,9 +171,8 @@ const createObjectPost = (object) => {
         });
 };
 
-//Funcion Para Editar y Guardar Post en Firestore
+// ------------------------------ Evento para guardar Post en Firestore tras Editar y Renderizar en la DOM --------------------------------------
 const updateObjectPost = (objectPost, idPost) => {
-    const modal = document.querySelector(".modal");
     const selectCategory = document.querySelector("#select-categories");
     const textSelect = selectCategory.options[selectCategory.selectedIndex].text;
     const spanDate = document.querySelector("#span-date-" + idPost);
@@ -205,6 +181,7 @@ const updateObjectPost = (objectPost, idPost) => {
     const imagePost = document.querySelector("#image-post-" + idPost);
     const spanPublic = document.querySelector("#publicPost-" + idPost);
     const inputCategory = document.querySelector("#input-category-" + idPost);
+    const modal = document.querySelector(".modal");
 
     updatePost(idPost, objectPost)
         .then(() => {
@@ -225,9 +202,9 @@ const updateObjectPost = (objectPost, idPost) => {
 
             modal.classList.remove("revelar"); //Cierra el modal
             btnProcess(false);
-            alerts("success", "Post Editado");
-            updateTotalCategory([selectCategory.value, inputCategory.value], "edit");
+            updateTotalCategory([selectCategory.value, inputCategory.value], "edit"); //actualizamos nuestro contador en la colleccion categoria
             inputCategory.value = selectCategory.value; // Actualizamos el nuevo valor del inputCategory de viewpost linea 77
+            alerts("success", "Post Editado");
         })
         .catch((error) => {
             btnProcess(false);
@@ -235,91 +212,9 @@ const updateObjectPost = (objectPost, idPost) => {
         });
 };
 
-//Función para cargar y almacenar imagen
-//La cual se encarga de verificar si hay una imagen en el inputFile,
-//de ser asi lo almacenamos en el storage
-const uploadImage = async(action) => {
-    const imageUpload = document.querySelector("#file-input");
-    const inputUrl = document.querySelector("#input-urlpost");
-    const inputNameImage = document.querySelector("#input-nameImage");
-    const arrayInfoImage = [];
-    let image, nameImage, urlImage;
-    if (imageUpload.files && imageUpload.files[0]) {
-        image = true;
-        nameImage = imageUpload.files[0].name;
-        urlImage = await saveImageFile(nameImage, imageUpload.files[0], "images")
-            .then(() => getPhotoURL(nameImage, "images"))
-            .then((imageURL) => {
-                return imageURL;
-            });
-    } else if (action == "create") {
-        //entonces crea un post sin imagen
-        image = false;
-        nameImage = "";
-        urlImage = "";
-    } else {
-        //entonces edita un post pero sin modificar imagen, o no tenia imagen
-        if (inputUrl.value == "") {
-            image = false;
-        } else {
-            image = true;
-        }
-        urlImage = inputUrl.value;
-        nameImage = inputNameImage.value;
-    }
-    arrayInfoImage.push(image, nameImage, urlImage);
-    return arrayInfoImage;
-};
-
-const updateTotalCategory = async(idCategory, action) => {
-    //action es el string donde indica que va eliminar y editar
-    const url = window.location.href;
-    const path = url.split("#");
-    if (action == "edit") {
-        if (idCategory[0] != idCategory[1]) {
-            //posicion 0 = valor del select , posicion 1 = valor de la categoria antes de ser editado
-            for (let key in idCategory) {
-                const category = await getCategory(idCategory[key]).then((res) =>
-                    res.data()
-                ); //get data para tener el total post
-                let totalCategory = category.totalPosts;
-                if (key == 0) {
-                    totalCategory = parseInt(totalCategory) + 1;
-                } else {
-                    totalCategory = parseInt(totalCategory) - 1;
-                }
-                updateCategory(idCategory[key], { totalPosts: totalCategory }).then(
-                    () => {
-                        if (path[1] == "/timeline") {
-                            const spanCategory = document.querySelector(
-                                "#category-" + idCategory[key]
-                            );
-                            spanCategory.textContent = totalCategory + " Posts";
-                        }
-                    }
-                );
-            }
-        }
-    } else {
-        const category = await getCategory(idCategory).then((res) => res.data()); //get data para tener el total post
-        let totalCategory = category.totalPosts;
-        if (action == "create") {
-            totalCategory = parseInt(totalCategory) + 1;
-        } else {
-            totalCategory = parseInt(totalCategory) - 1;
-        }
-        updateCategory(idCategory, { totalPosts: totalCategory }).then(() => {
-            if (path[1] == "/timeline") {
-                const spanCategory = document.querySelector("#category-" + idCategory);
-                spanCategory.textContent = totalCategory + " Posts";
-            }
-        });
-    }
-};
 export {
     addEventFormPost,
     addEventDeletePost,
     addEventEditPost,
-    updateTotalCategory,
     createObjectPost,
 };

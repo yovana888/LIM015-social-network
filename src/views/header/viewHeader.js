@@ -1,11 +1,13 @@
 import { addEventLinkUser } from "../timeline/eventsTimeline.js";
+import { signOut } from '../../db/firebase-auth.js';
+
 export const header = () => {
     const header = document.createElement('header');
     header.className = 'header';
     header.innerHTML = `        
 
-    <a href="#/timeline"> <img class="logo" src="../../images/svg/logo.svg" alt="logo"/> </a>
-    <a href="#/timeline"> <img class="icon-logo" src="../../images/svg/favicon.svg" alt="logo"> </a>
+    <a href="#/timeline"> <img class="logo" src="../../assets/images/svg/logo.svg" alt="logo"/> </a>
+    <a href="#/timeline"> <img class="icon-logo" src="../../assets/images/svg/favicon.svg" alt="logo"> </a>
     
     <section class="input-search">
         <input type="search" name="" id="search" autocomplete="off">
@@ -27,7 +29,8 @@ export const header = () => {
         </section>
     </div>
     `;
-    /* Searcher */
+    // ------------------------------ Eventos para Search-----------------------------------------------
+
     const inputSearch = header.querySelector('#search');
     const ulResulSearch = header.querySelector('#result-search');
     const allUsers = JSON.parse(window.localStorage.getItem('allUsers')); //extraemos de local viewHeaderUser Linea 21    
@@ -45,5 +48,18 @@ export const header = () => {
         ulResulSearch.innerHTML = html;
         addEventLinkUser();
     }
+
+    // ------------------------------ Evento Cerrar Sesión-----------------------------------------------
+
+    const btnSalir = header.querySelector('#logout');
+    btnSalir.addEventListener('click', () => {
+        signOut().then(() => {
+            document.querySelector('#div-body').classList.remove('bodyBackground');
+            window.location.hash = '#/login';
+        }).catch((error) => {
+            alert(error)
+        });
+    });
+
     return header;
 }

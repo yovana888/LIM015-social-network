@@ -1,5 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css?family=Proxima+Nova'); */
+
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;400;600&family=Roboto:wght@300;400&display=swap');
+
 /***************
    * GENERAL   * 
    ***************/
@@ -24,7 +26,7 @@
     --clr-info: #00CFE8;
     --clr-warning: #FF9F43;
     --clr-txt: #131920;
-    --clr-icon-gray:  #bebcbc;
+    --clr-icon-gray: #bebcbc;
     --clr-border-input: #dee0e4;
     --clr-txt-input: #6e6b7b;
 }
@@ -76,6 +78,7 @@ h6 {
 .text-info {
     color: #198ae3;
 }
+
 
 /***************
    *  ALERTS   * 
@@ -244,6 +247,7 @@ h6 {
     margin-left: 8px;
 }
 
+
 /** Botón reacciones **/
 
 .btn-notlike {
@@ -288,6 +292,7 @@ h6 {
     border: solid 1.5px var(--clr-primary);
 }
 
+
 /** Boton para crear publicación **/
 
 .btn-create-post {
@@ -298,6 +303,7 @@ h6 {
     font-size: 0.9rem;
     background: linear-gradient(90.22deg, var(--clr-primary) 23.46%, #FE8996 64.13%);
 }
+
 
 /***links***/
 
@@ -341,6 +347,7 @@ h6 {
     max-width: 180px;
 }
 
+
 /*******************
    * FORMULARIOS   * 
    ****************/
@@ -353,7 +360,8 @@ h6 {
     background-image: url(../images/svg/registro_img_final.svg);
 }
 
-.imgBx {/*contenedor de las imagenes de costado del form */
+.imgBx {
+    /*contenedor de las imagenes de costado del form */
     background-color: #ededed;
     text-align: center;
     background-repeat: no-repeat;
@@ -384,13 +392,13 @@ h6 {
     position: relative;
 }
 
-.form-group > i {
+.form-group>i {
     position: absolute;
     top: 35px;
     color: var(--clr-icon-gray);
 }
 
-.form-group  i:first-child {
+.form-group i:first-child {
     left: 15px;
 }
 
@@ -410,6 +418,7 @@ h6 {
     outline: none;
     border-color: #7367f0;
 }
+
 
 /***Input checkbox**/
 
@@ -467,6 +476,7 @@ img {
     /*Alinea la imagen con texto hacia el costado*/
 }
 
+
 /**Linea Separador***/
 
 .separador {
@@ -521,9 +531,11 @@ img {
     margin-top: 4px;
 }
 
+
 /**********************
    * Reset Password   * 
    ********************/
+
 .h2,
 .description {
     text-align: center;
@@ -591,11 +603,13 @@ img {
 /**********************
    *     HEADER       * 
    ********************/
-.header > .logo {
+
+.header>.logo {
     margin-top: 10px;
     flex-basis: 10%;
     max-width: 16%;
 }
+
 
 /** Buscador **/
 
@@ -606,7 +620,7 @@ img {
     position: relative;
 }
 
-.input-search > div {
+.input-search>div {
     display: table-cell;
     vertical-align: middle;
     /* needed for Safari */
@@ -636,6 +650,7 @@ img {
     color: var(--clr-white);
 }
 
+
 /** <ul>  con resultados del Buscador **/
 
 .result-search {
@@ -660,8 +675,7 @@ img {
 }
 
 
-
-/** Sección lateral de navegación ( titulos y nombre e imagen del usuario ) **/ 
+/** Sección lateral de navegación ( titulos y nombre e imagen del usuario ) **/
 
 .side-navigation {
     flex-basis: 35%;
@@ -687,6 +701,7 @@ img {
     color: var(--clr-primary);
     text-decoration: none;
 }
+
 
 /****** Avatar del usuario ******/
 
@@ -774,6 +789,7 @@ img {
     color: #d589ff
 }
 
+
 /** Scroll Bar de categorias **/
 
 .categories::-webkit-scrollbar {
@@ -823,7 +839,7 @@ img {
 .popular-posts {
     background-image: url(../images/svg/back-popular-posts.svg);
     background-repeat: no-repeat;
-    background-size:100% 100%;
+    background-size: 100% 100%;
     padding: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -883,6 +899,7 @@ img {
 
 /* ---AGREGE CAMBIO DIANA :3--- */
 
+
 /* box */
 
 .head-popularPosts {
@@ -936,6 +953,8 @@ img {
     justify-content: flex-end;
     align-self: flex-end;
     justify-content: flex-end;
+    position: absolute;
+    margin-top: 15%;
 }
 
 .box-plus img {
@@ -950,6 +969,7 @@ img {
     color: var(--clr-primary);
     padding-right: 4px;
 }
+
 
 /***************
    * MODAL     * 
@@ -976,6 +996,7 @@ img {
     padding: 1rem;
     border-radius: 10px;
 }
+
 
 /** Contenido de modal de crear nuevo post**/
 
@@ -1023,7 +1044,9 @@ textarea {
     height: 140px;
 }
 
+
 /* content-modal-delete */
+
 .content-modal-delete {
     position: fixed;
     z-index: 2;
@@ -1046,7 +1069,9 @@ textarea {
     padding: 0.5rem;
 }
 
+
 /* Modal edit profile */
+
 .content-modal-edit-profile {
     position: absolute;
     width: 450px;
@@ -1055,7 +1080,8 @@ textarea {
     overflow-y: scroll !important;
 }
 
-.content-modal-edit-profile::-webkit-scrollbar { /*Sin barra de scroll en modal*/
+.content-modal-edit-profile::-webkit-scrollbar {
+    /*Sin barra de scroll en modal*/
     width: 0;
 }
 
@@ -1067,7 +1093,7 @@ textarea {
     border-bottom: solid 1px rgb(228, 226, 226);
 }
 
-.head-modal > button {
+.head-modal>button {
     width: 30px;
     height: 30px;
     padding: 0;
@@ -1080,7 +1106,7 @@ textarea {
     /* border: solid 1px blue; */
 }
 
-.head-modal > button:hover {
+.head-modal>button:hover {
     filter: brightness(85%);
 }
 
@@ -1091,6 +1117,7 @@ textarea {
 .modal.revelar {
     display: block;
 }
+
 
 /***************
    * EMOJI     * 
@@ -1176,15 +1203,18 @@ textarea {
     color: rgb(37, 37, 37);
 }
 
+
 /*******************
    *    PROFILE    * 
    *****************/
+
 .cover-user {
     grid-area: coverUser;
     position: relative;
 }
 
-.cover-user .img-cover-user { /*cover del usuario*/
+.cover-user .img-cover-user {
+    /*cover del usuario*/
     width: 100%;
     height: 100%;
     position: absolute;
@@ -1196,7 +1226,8 @@ textarea {
     border-radius: 5px;
 }
 
-.up-information-profile { /*Informacion del usuario*/
+.up-information-profile {
+    /*Informacion del usuario*/
     width: 100%;
     height: 100%;
     position: absolute;
@@ -1211,7 +1242,8 @@ textarea {
     margin: 0 0 15px 0;
 }
 
-.up-information-profile img {/*imagen de perfil */
+.up-information-profile img {
+    /*imagen de perfil */
     margin: 0 10px -4rem 0;
     width: 150px;
     height: 150px;
@@ -1264,10 +1296,13 @@ textarea {
     font-size: 0.90rem;
 }
 
+.info-friends span {
+    width: 150px;
+}
+
 .info-friends .avatar {
     margin-bottom: 10px;
 }
-
 
 .info-friends p {
     width: 150px;
@@ -1322,7 +1357,6 @@ textarea {
 }
 
 
-
 /* modified modal dropdown private and public */
 
 .dropdownModal {
@@ -1354,6 +1388,7 @@ textarea {
 .content-modal-edit-profile .body-modal form {
     padding-bottom: 1.5rem;
 }
+
 
 /* Estilos de la foto de perfil a editar */
 
@@ -1441,8 +1476,3 @@ input:disabled {
     display: flex;
     justify-content: space-around;
 }
-
-
-
-
-
