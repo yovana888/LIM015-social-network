@@ -5,8 +5,8 @@ export const header = () => {
     const header = document.createElement('header');
     header.className = 'header';
     header.innerHTML = `        
-    <a href="#/timeline"> <img class="logo" src="../../assets/images/svg/logo.svg" alt="logo"/> </a>
-    <a href="#/timeline"> <img class="icon-logo" src="../../assets/images/svg/favicon.svg" alt="logo"> </a>
+    <a href="#/timeline"> <img class="logo" src="../src/assets/images/svg/logo.svg" alt="logo"/> </a>
+    <a href="#/timeline"> <img class="icon-logo" src="../src/assets/images/svg/favicon.svg" alt="logo"> </a>
     
     <section class="input-search">
         <input type="search" name="" id="search" autocomplete="off">

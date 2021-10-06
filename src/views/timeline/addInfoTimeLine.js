@@ -65,7 +65,7 @@ const loadViewPost = (dataPublic) => {
 
                                 <div class="header-right">
                                     <div class="post-category">
-                                        ${element.idUser == idUserAuth ? `<img class="btn btn-edit" width="22px" height="22px" data-id="${element.idPost}" src="../../assets/images/svg/edit.png"><img class="btn btn-delete" data-id="${element.idPost}" src="../../assets/images/svg/delete.png">`: ``}
+                                        ${element.idUser == idUserAuth ? `<img class="btn btn-edit" width="22px" height="22px" data-id="${element.idPost}" src="../src/assets/images/svg/edit.png"><img class="btn btn-delete" data-id="${element.idPost}" src="../src/assets/images/svg/delete.png">`: ``}
                                         <span class="badge badge-secondary" id="span-category-${element.idPost}">${element.nameCategory}</span>
                                     </div>          
                                 </div>
@@ -78,7 +78,7 @@ const loadViewPost = (dataPublic) => {
 
                             <div class="post-footer footer">
                                 <div class="footer-reactions reactions">
-                                    <img class="img-like likes" id="like-${element.idPost}" width="22px" height="22px" data-id="${element.idPost}"  src=" ${element.arrLikes.includes(idUserAuth)? "../../assets/images/svg/like.png": "../../assets/images/svg/notlike.png"}"  data-id="${element.idPost}"/>
+                                    <img class="img-like likes" id="like-${element.idPost}" width="22px" height="22px" data-id="${element.idPost}"  src=" ${element.arrLikes.includes(idUserAuth)? "../src/assets/images/svg/like.png": "../src/assets/images/svg/notlike.png"}"  data-id="${element.idPost}"/>
                                     <span class="count-reaction" id="count-like-${element.idPost}">${element.arrLikes.length}</span> 
                                     
                                     <img class="img-comment btn-comments" id="comment-${element.idPost}" width="22px" height="22px"   src="../../assets/images/svg/notchat.svg"  data-id="${element.idPost}"/>
@@ -115,7 +115,7 @@ const loadViewCategory = async() => {
     allCategoriesCourse.forEach(element => {
         const figureCategory = document.createElement('figure');
         figureCategory.classList.add('category');
-        figureCategory.innerHTML = `<img class="categoryIcon categoryName" src="../../assets/images/svg/categorias/${ element.imagen }" alt="logo-categories" data-id=${element.idCategory} data-total=${element.totalPosts}>
+        figureCategory.innerHTML = `<img class="categoryIcon categoryName" src="../src/assets/images/svg/categorias/${ element.imagen }" alt="logo-categories" data-id=${element.idCategory} data-total=${element.totalPosts}>
                                     <div class="content-category">
                                         <span class="text-category categoryName" data-id=${element.idCategory} data-total=${element.totalPosts}> ${ element.nameCategory } </span>
                                         <p class="text-muted" id="category-${element.idCategory}">  ${ element.totalPosts } post</p>
@@ -154,7 +154,7 @@ const loadViewPopularPost = async () => {
                         <p class="p-posts"> ${element.contentPost.substring(0, 55)}... </p>
                     </div>
                     <div class="box-plus">
-                        <img src="../../assets/images/imgPopularPosts/plus.png" alt="" class="plus"  href="#seccion1">
+                        <img src="../src/assets/images/imgPopularPosts/plus.png" alt="" class="plus"  href="#seccion1">
                     </div>`
         sliderPost.appendChild(cardPost);
     })
