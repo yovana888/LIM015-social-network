@@ -74,7 +74,7 @@ describe('deletePostFs', () =>{
 })
 
 /* --------test------ */
-describe('updatePost', () => {
+describe('updatePost modificado', () => {
   it('debería poder actualizar un post por su id', async () => {
     const posts = await getAllPosts();
     posts.forEach((doc) => {
