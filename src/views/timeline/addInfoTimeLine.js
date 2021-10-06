@@ -81,7 +81,7 @@ const loadViewPost = (dataPublic) => {
                                     <img class="img-like likes" id="like-${element.idPost}" width="22px" height="22px" data-id="${element.idPost}"  src=" ${element.arrLikes.includes(idUserAuth)? "../src/assets/images/svg/like.png": "../src/assets/images/svg/notlike.png"}"  data-id="${element.idPost}"/>
                                     <span class="count-reaction" id="count-like-${element.idPost}">${element.arrLikes.length}</span> 
                                     
-                                    <img class="img-comment btn-comments" id="comment-${element.idPost}" width="22px" height="22px"   src="../../assets/images/svg/notchat.svg"  data-id="${element.idPost}"/>
+                                    <img class="img-comment btn-comments" id="comment-${element.idPost}" width="22px" height="22px"   src="../src/assets/images/svg/notchat.svg"  data-id="${element.idPost}"/>
                                     <span class="count-reaction" id="count-comment-${element.idPost}">${element.arrComments.length}</span>             
                                 </div>
                                 <div class="footer-comments comments" id="footer-comments-${element.idPost}" style="display:none;">
