@@ -39,9 +39,9 @@ const addEventModalCreatePost = () => {
         modal.classList.add('revelar');
     });
 
-    btnCerrarModal.addEventListener('click', () => {
+    btnCerrarModal.addEventListener('click', () => { //Cerrar modal en la X
         modal.classList.remove('revelar')
-        document.querySelector('#form-create-post').reset();
+        document.querySelector('#form-create-post').reset(); //Limpia el formulario
     });
 }
 

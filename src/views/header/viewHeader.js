@@ -1,7 +1,8 @@
 import { addEventLinkUser } from "../timeline/eventsTimeline.js";
 import { signOut } from '../../db/firebase-auth.js';
+import { allUsers } from "../timeline/getDataFirebase.js";
 
-export const header = () => {
+export const header = async () => {
     const header = document.createElement('header');
     header.className = 'header';
     header.innerHTML = `        
@@ -32,15 +33,15 @@ export const header = () => {
 
     const inputSearch = header.querySelector('#search');
     const ulResulSearch = header.querySelector('#result-search');
-    const allUsers = JSON.parse(window.localStorage.getItem('allUsers')); //extraemos de local viewHeaderUser Linea 21    
+    const dataUsers = await allUsers().then(response => response)
     inputSearch.addEventListener('keyup', () => {
         const search = inputSearch.value.toLowerCase();
-        let resultSearch = searchResult(allUsers, search);
+        let resultSearch = searchResult(dataUsers, search);
         const htmlResultSearch = resultSearch.map(user => `<li> <span class="link-user" data-id="${user.idUser}"> ${user.nameUser} </span> </li> `)
         search != '' ? displayResults(htmlResultSearch) : ulResulSearch.innerHTML = "";
     });
 
-    const searchResult = (allUsers, search) => allUsers.filter(user => user.nameUser.toLowerCase().includes(search)) //user.nameUser.toLowerCase().indexOf(search.toLowerCase()) > -1
+    const searchResult = (dataUsers, search) => dataUsers.filter(user => user.nameUser.toLowerCase().includes(search)) //user.nameUser.toLowerCase().indexOf(search.toLowerCase()) > -1
 
     const displayResults = (resultSearch) => {
         const html = resultSearch.length > 0 ? resultSearch.join('') : "";

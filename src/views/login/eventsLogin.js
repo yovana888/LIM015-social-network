@@ -63,7 +63,7 @@ async function responseOk(result, google) {
         }
         alerts('success', 'Bienvenido') //mostramos alerta de exito
         window.location.hash = "#/timeline"; //redireciona al timeLine  
-    } else {
+    } else { //es decir que se esta autenticando con email y contraseña
         if (result.user.emailVerified === true) {
             window.location.hash = '#/timeline';
             alerts('success', 'Bienvenido'); //mostramos alerta de exito

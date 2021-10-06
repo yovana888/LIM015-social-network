@@ -53,9 +53,11 @@
     .side-navigation .fas {
         font-size: 1.1rem
     }
+    .content-paragraph {
+        padding: 0.8rem;
+    }
     .post-content .content-paragraph {
         font-size: 0.85rem;
-        ;
     }
     .img-likes,
     .img-comment {
@@ -103,9 +105,6 @@
         margin-right: 0;
         padding-right: 0;
         font-size: 13px;
-    }
-    .content-paragraph {
-        padding: 0.8rem;
     }
 }
 

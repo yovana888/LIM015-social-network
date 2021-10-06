@@ -31,6 +31,9 @@
 
 .header-left {
     flex: 1;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 8px;
 }
 
 .author-name {
@@ -69,12 +72,6 @@
 .author-name:hover,
 .post-date:hover {
     text-decoration: underline;
-}
-
-.header-left {
-    padding-left: 15px;
-    padding-top: 10px;
-    padding-bottom: 8px;
 }
 
 
