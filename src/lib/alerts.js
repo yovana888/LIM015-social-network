@@ -41,7 +41,7 @@ const alertProcess = (show) => {
     if (show) {
         containerAlert.innerHTML = '';
         containerAlert.classList.add('process-msg');
-        containerAlert.innerHTML = `<i class="fa fa-chevron-right"></i> Procesando <img src="../assets/images/svg/load.gif" alt="load" width="25" height="25" >`;
+        containerAlert.innerHTML = `<i class="fa fa-chevron-right"></i> Procesando <img src="../src/assets/images/svg/load.gif" alt="load" width="25" height="25" >`;
         containerAlert.style.display = "block";
     } else {
         containerAlert.style.display = "none";
@@ -53,7 +53,7 @@ const alertProcess = (show) => {
 const btnProcess = (show) => {
     const btnModal = document.querySelector('#share-post');
     if (show) {
-        btnModal.innerHTML = `Procesando <img src="../assets/images/svg/load.gif" alt="load" width="25" height="25" >`;
+        btnModal.innerHTML = `Procesando <img src="../src/assets/images/svg/load.gif" alt="load" width="25" height="25" >`;
     } else {
         btnModal.innerHTML = ``;
     }

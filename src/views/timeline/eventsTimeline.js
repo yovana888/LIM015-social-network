@@ -14,7 +14,6 @@ const addEventLinkUser = () => {
             const idUser = e.target.dataset.id;
             localStorage.setItem('idUserRedirecionar', idUser); //almacenar el id del usuario a redireccionar
             window.location.href = `#/profile/${idUser}`;
-            //window.location.reload();
         })
     })
 }
@@ -60,10 +59,10 @@ const addEventLike = () => {
             let newArrayLike;
             if (dataPost.arrLikes.includes(idUserAuth)) {
                 newArrayLike = dataPost.arrLikes.filter((item) => item !== idUserAuth);
-                imgLike.src = "../assets/images/svg/notlike.png";
+                imgLike.src = "../src/assets/images/svg/notlike.png";
             } else {
                 newArrayLike = [...dataPost.arrLikes, idUserAuth];
-                imgLike.src = "../assets/images/svg/like.png";
+                imgLike.src = "../src/assets/images/svg/like.png";
             }
             updatePost(idPost, { arrLikes: newArrayLike });
             countLike.innerText = newArrayLike.length; //actualiza el contador en la DOM
