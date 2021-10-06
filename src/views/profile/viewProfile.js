@@ -1,4 +1,4 @@
-import { loadEditModal } from "./editProfile.js";
+import { loadViewModalEditProfile } from "../modal/viewModalEditProfile.js";
 export default () => {
     const viewProfile = document.createElement('section');
     viewProfile.className = 'container-profile';
@@ -8,9 +8,9 @@ export default () => {
         
         <section class="up-information-profile">
             <section class="user-information-profile">
-                <img src="" alt="" class="avatar avatar-profile" id="avatar-user">
+                <img src="" alt="" class="avatar avatar-profile imguser-profile" id="avatar-user">
                 <section class="user-name-profile">
-                    <p id="avatar-name"> </p>
+                    <p id="avatar-name" class="nameuser-profile"> </p>
                     <p id="avatar-description"> </p>
                 </section>
             </section>
@@ -57,6 +57,6 @@ export default () => {
     </section>
     `;
     const viewEditModal = viewProfile.querySelector('#modal-editProfile');
-    viewEditModal.innerHTML = loadEditModal();
+    viewEditModal.innerHTML = loadViewModalEditProfile();
     return viewProfile;
 }
