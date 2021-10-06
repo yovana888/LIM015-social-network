@@ -35,14 +35,14 @@ De igual forma manejamos la plataforma de Github projects para la asignación de
 
 ## 4. Diseño :sparkles:
 
-En el primer sprint desarrolamos el prototipo de baja fidelidad que a continuación se puede visualizar y realizamos una encuesta para obtener las sugerencias de los usuarios, en cuanto a estructura, paleta de colores y nombre de la red social. Obtuvimos que al 33.3% les gustó el nombre de courseShare seguido de courses Network con 27.8%. El logo finalizado que usamos en el diseño fue escogido por el 39% de los encuestados y la estructura fue aprobada por más del 50%. Dicha encuesta se puede visualizar en el siguiente [link](https://docs.google.com/forms/d/1Qs-LX0jMYQQH0qi4hPuqTBe0Gsx4ceJlo8rRuu0p6Hc/edit?userstoinvite=angelicadiana2002@gmail.com&ts=6128fbf2)
+En el primer sprint desarrolamos el prototipo de baja fidelidad que a continuación se puede visualizar y realizamos una encuesta para obtener las sugerencias de los usuarios, en cuanto a estructura, paleta de colores y nombre de la red social. Obtuvimos que al 33.3% les gustó el nombre de courseShare seguido de courses Network con 27.8%. El logo finalizado que usamos en el diseño fue escogido por el 39% de los encuestados y la estructura fue aprobada por más del 50%. Dicha encuesta se puede visualizar en el siguiente [link](https://docs.google.com/forms/d/1Qs-LX0jMYQQH0qi4hPuqTBe0Gsx4ceJlo8rRuu0p6Hc/edit?userstoinvite=angelicadiana2002@gmail.com&ts=6128fbf2).
 
 ### Prototipo de baja fidelidad
 Login de baja fidelidad
 ![login](https://github.com/margaZM/LIM015-social-network/blob/dev/src/images/imgReadme/Group%2038.png?raw=true)
 
 Timeline
-![Timeline](hhttps://github.com/margaZM/LIM015-social-network/blob/dev/src/images/imgReadme/Group%2040.png?raw=true)
+![Timeline](https://github.com/margaZM/LIM015-social-network/blob/main/src/images/imgReadme/Group%2040.png?raw=true)
 
 Profile
 ![Profile](https://github.com/margaZM/LIM015-social-network/blob/dev/src/images/imgReadme/Group%2040.png?raw=true)
@@ -61,7 +61,9 @@ Profile
 
 ![Profile](https://raw.githubusercontent.com/margaZM/LIM015-social-network/dev-diana/src/images/imgReadme/profile.png)
 
-CourseShare tiene un diseño responsive por lo tanto permite que pueda ser visualizado en diferentes dispositivos:
+### Diseño responsive
+CourseShare tiene un diseño responsive por lo tanto permite que pueda ser visualizado en diferentes dispositivos: 
+
 Login
 ![login](https://github.com/margaZM/LIM015-social-network/blob/dev/src/images/imgReadme/responsive3.png?raw=true)
 
