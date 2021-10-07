@@ -1,8 +1,10 @@
 import { getUser } from '../../db/firestore.js';
 import { loadViewModals } from '../modal/viewModals.js';
 import { getObjectPosts, allCategories, getTopPopularPosts } from './getDataFirebase.js';
-import { alerts } from '../../lib/alerts.js'
+import { alerts } from '../../lib/alerts.js';
+import { addEventDeletePost, addEventEditPost } from './eventsCrud.js'
 import { createEmoji } from '../../lib/emoji.js';
+import { addEventLinkUser, addEventLike, addEventComments } from './eventsTimeline.js'
 
 // ------------------------------ Renderizar Header con la Info User------------------------------------------------
 
@@ -21,7 +23,7 @@ const loadViewHeaderUser = async() => {
 
 //--------------------------------- Obtener Data para Renderizar Todos los Posts o por Filtro -------------------------------------------------------------
 
-const loadAllPosts = async(idCategory, idUser) => {//Extrae la data publica o privada 
+const loadAllPosts = async(idCategory, idUser) => { //Extrae la data publica o privada 
     const objectDataPosts = await getObjectPosts(idCategory, idUser).then((response) => response);
     const idUserAuth = localStorage.getItem('iduser');
     const dataPublic = objectDataPosts.filter((element) => element.publicPosts == "true" || element.idUser == idUserAuth);
@@ -39,7 +41,6 @@ const loadAllPosts = async(idCategory, idUser) => {//Extrae la data publica o pr
 
 const loadViewPost = (dataPublic) => {
         const containerPost = document.querySelector("#container-posts");
-        const infoUserAuth = JSON.parse(window.localStorage.getItem('infouser')); //linea 13 parseamos el objeto para guardarlo en LocalStorage
         const idUserAuth = localStorage.getItem('iduser');
 
         if (dataPublic.length == 0 || dataPublic == undefined) {
@@ -85,25 +86,18 @@ const loadViewPost = (dataPublic) => {
                                     <span class="count-reaction" id="count-comment-${element.idPost}">${element.arrComments.length}</span>             
                                 </div>
                                 <div class="footer-comments comments" id="footer-comments-${element.idPost}" style="display:none;">
-                                   <div class="comments-box box">
-                                        <div class="box-profile profile">
-                                            <img src="${infoUserAuth.photouser}" class="profile-pic">
-                                        </div>
-                                        <div class="box-bar bar">
-                                            <input type="text" id="input-comment-${element.idPost}" placeholder="Escribe un comentario..." class="bar-input">
-                                        </div>
-                                        <button class="public-comment" id="btn-comment-${element.idPost}" type="button">Publicar</button>
-                                   </div>
-
                                 </div>
                             </div>`;
 
                 const theFirstChild = containerPost.firstChild;
                 containerPost.insertBefore(post, theFirstChild); //renderiza en el hijo anterior del primero
         });
-
-    }
-   
+        addEventDeletePost();
+        addEventEditPost();
+        addEventLinkUser();
+        addEventLike();
+        addEventComments();
+    } //Agregamos los Eventos principales para cada post
 };
 
 
@@ -178,13 +172,13 @@ const loadTextareaPosts = async() => {//Renderizar información del usuario(nomb
 // ------------------------------ Cargamos los Componentes Necesarios para mostrar el TimeLine------------------
 
 const loadComponetsTimeLine = async () => {
+    loadViewModals();
+    loadTextareaPosts();
+    createEmoji();
     await loadViewHeaderUser();
     await loadAllPosts("all", "all");
     await loadViewCategory();
     await loadViewPopularPost();
-    loadViewModals();
-    loadTextareaPosts();
-    createEmoji();
 }
 
 

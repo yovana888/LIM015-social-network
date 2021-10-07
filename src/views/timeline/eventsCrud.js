@@ -2,7 +2,7 @@ import { uploadImage, updateTotalCategory } from "../../lib/utils.js";
 import { alerts, btnProcess } from "../../lib/alerts.js";
 import { loadViewPost } from "./addInfoTimeLine.js";
 import { savePost, datePost, deletePostFs, updatePost, getPost } from "../../db/firestore.js";
-import { addEventLike, addEventComments, addEventLinkUser } from "./eventsTimeline.js"
+
 
 
 // ------------------------------ Evento al hacer Submit en el Modal --------------------------------------
@@ -155,11 +155,6 @@ const createObjectPost = (object) => {
             }];
 
             loadViewPost(newObjectPost); //Rendereizamos el Post en la DOM, funcion esta en viewPost linea 37
-            addEventEditPost();
-            addEventDeletePost(); //agrego de nuevo los eventos
-            addEventLike();
-            addEventComments();
-            addEventLinkUser();
             modal.classList.remove("revelar"); //Cierra el modal?
             btnProcess(false);
             updateTotalCategory(selectCategory.value, "create"); //editamos el total de Categorias

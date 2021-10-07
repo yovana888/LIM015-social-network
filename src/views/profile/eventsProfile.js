@@ -4,7 +4,7 @@ import { saveImageFile, getPhotoURL } from "../../db/storage.js";
 import { alertProcess, alerts } from "../../lib/alerts.js";
 import { createEmoji } from '../../lib/emoji.js';
 import { loadViewModals } from '../modal/viewModals.js';
-import { addEventLinkUser, addEventLike, addEventComments } from '../timeline/eventsTimeline.js'
+import { addEventLinkUser } from '../timeline/eventsTimeline.js'
 
 // ------------------------ Carga la Info del Usuario (portada, profile) ---------------------------
 const loadInfoUser = async() => {
@@ -195,16 +195,14 @@ const showTopTenUsers = async() => {
 }
 const loadComponentsProfile = async() => {
     /*Cargamos la Info para el TimeLine-Profile*/
+    loadViewModals(); //del crud
+    loadTextareaPosts();
+    createEmoji();
     await loadViewHeaderUser();
     await loadInfoUser();
     await loadPostUser();
     showButtonsProfile();
     showModalEditProfile();
     showTopTenUsers();
-    loadViewModals(); //del crud
-    loadTextareaPosts();
-    createEmoji();
-    addEventLike();
-    addEventComments();
 };
 export { loadComponentsProfile }

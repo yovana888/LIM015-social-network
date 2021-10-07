@@ -3,7 +3,7 @@ import { updatePost, getPost } from "../../db/firestore.js";
 import { loadAllPosts } from './addInfoTimeLine.js';
 import { allUsers } from './getDataFirebase.js';
 import { alerts } from '../../lib/alerts.js';
-import { addEventFormPost, addEventDeletePost, addEventEditPost } from './eventsCrud.js'
+import { addEventFormPost } from './eventsCrud.js'
 
 // ------------------------------ Evento Click para redireccionar al perfil de un usuario-----------
 
@@ -101,9 +101,16 @@ const addEventComments = async() => {
             const footerComments = document.querySelector("#footer-comments-" + idPost); //elemento padre comentarios
             const allUsersPost = await allUsers().then((response) => response); //import de getDataFirebase linea 12 
 
-            footerComments.style.display = "block"; //mostramos la seccion del footer Post
-
             if (flag == false) {
+                footerComments.innerHTML = `<div class="comments-box box">
+                                                <div class="box-profile profile">
+                                                    <img src="${infoUserAuth.photouser}" class="profile-pic">
+                                                </div>
+                                                <div class="box-bar bar">
+                                                    <input type="text" id="input-comment-${idPost}" placeholder="Escribe un comentario..." class="bar-input">
+                                                </div>
+                                                <button class="public-comment" id="btn-comment-${idPost}" type="button">Publicar</button>
+                                            </div>`;
                 const dataPost = await getPost(idPost).then((response) => response.data());
                 const arrayComments = dataPost.arrComments;
 
@@ -115,12 +122,12 @@ const addEventComments = async() => {
                         footerComments.appendChild(boxCommentFriends);
                     });
                 }
-
+                footerComments.style.display = "block"; //mostramos la seccion del footer Post
                 addEventPostComment(idPost, arrayComments, infoUserAuth); //Linea 146, Evento Button Pubicar Comentario
                 flag = true;
             } else {
-                footerComments.style.display = "none";
                 footerComments.innerHTML = "";
+                footerComments.style.display = "none";
                 flag = false;
             }
         });
@@ -192,12 +199,7 @@ const path = url.split('#');
 const loadEventsDomTimeLine = () => {
     document.querySelector('#div-body').className = "bodyBackground";
     addEventModalCreatePost();
-    addEventLinkUser();
-    addEventLike();
-    addEventComments();
     addEventFormPost();
-    addEventDeletePost();
-    addEventEditPost();
     changeNameFileImage();
     if (path[1] == '/timeline') {
         sliderPopularPost(); //Para Popular Post
