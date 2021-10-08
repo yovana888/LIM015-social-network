@@ -23,9 +23,9 @@ const allUsers = () => {
 };
 
 // --------------------------------- Obtener todas la Categorias ---------------------------
-const allCategories = () => {
+const allCategories = async() => {
     const objectCategories = [];
-    return getAllCategories().then((response) => {
+    await getAllCategories().then((response) => {
         response.forEach((doc) => {
             objectCategories.push({
                 idCategory: doc.id,
@@ -34,8 +34,8 @@ const allCategories = () => {
                 totalPosts: doc.data().totalPosts,
             });
         });
-        return objectCategories;
     });
+    return objectCategories;
 };
 
 // --------------------------------- Obtener todos los Posts ---------------------------
@@ -43,7 +43,7 @@ const allCategories = () => {
 const getObjectPosts = async(idCategory, idUser) => {
     let objectPosts = [];
     const allUsersPosts = await allUsers().then((response) => response);
-    const allCategoriesCourses = await allCategories().then((response) => response);
+    const allCategoriesCourses = await allCategories();
     return getAllPosts().then((response) => {
         response.forEach((doc) => {
             const userPost = allUsersPosts.find((element) => element.idUser === doc.data().idUser); //doc.data().idUser Usuario que publico

@@ -1,10 +1,10 @@
 import { getUser } from '../../db/firestore.js';
 import { loadViewModals } from '../modal/viewModals.js';
 import { getObjectPosts, allCategories, getTopPopularPosts } from './getDataFirebase.js';
-import { alerts } from '../../lib/alerts.js';
+import { alerts, alertProcess } from '../../lib/alerts.js';
 import { addEventDeletePost, addEventEditPost } from './eventsCrud.js'
 import { createEmoji } from '../../lib/emoji.js';
-import { addEventLinkUser, addEventLike, addEventComments } from './eventsTimeline.js'
+import { addEventLinkUser, addEventLike, addEventComments, addEventShowCategories } from './eventsTimeline.js'
 
 // ------------------------------ Renderizar Header con la Info User------------------------------------------------
 
@@ -31,7 +31,7 @@ const loadAllPosts = async(idCategory, idUser) => { //Extrae la data publica o p
     const containerPost = document.querySelector("#container-posts");
     containerPost.innerHTML = "";
     loadViewPost(dataPublic);
-
+    alertProcess(false);
     if (totalPostsPrivate > 0 && idCategory != "all") {
         alerts('info', 'No se mostraran ' + totalPostsPrivate + ' por que son privados') //Alerta en las categorías 
     }
@@ -116,6 +116,7 @@ const loadViewCategory = async() => {
                                     </div>`
         categories.appendChild(figureCategory);
     });
+    addEventShowCategories();
 }
 
 

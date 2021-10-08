@@ -2,7 +2,7 @@ import { sliderPopularPost } from '../../lib/animation.js';
 import { updatePost, getPost } from "../../db/firestore.js";
 import { loadAllPosts } from './addInfoTimeLine.js';
 import { allUsers } from './getDataFirebase.js';
-import { alerts } from '../../lib/alerts.js';
+import { alerts, alertProcess } from '../../lib/alerts.js';
 import { addEventFormPost } from './eventsCrud.js'
 
 // ------------------------------ Evento Click para redireccionar al perfil de un usuario-----------
@@ -82,7 +82,9 @@ const addEventShowCategories = () => {
     //Entonces Cargamos los Post de acuerdo a la Categoria que se hizo Click o la Imagen
     const allCategoriesName = document.querySelectorAll('.categoryName');
     allCategoriesName.forEach(span => {
-        span.addEventListener('click', async(e) => {
+        span.addEventListener('click', (e) => {
+            e.preventDefault;
+            alertProcess(true);
             const idSpanCategory = e.target.dataset.id;
             loadAllPosts(idSpanCategory, "all");
         })
@@ -203,7 +205,6 @@ const loadEventsDomTimeLine = () => {
     changeNameFileImage();
     if (path[1] == '/timeline') {
         sliderPopularPost(); //Para Popular Post
-        addEventShowCategories();
     }
 }
 
@@ -211,5 +212,6 @@ export {
     loadEventsDomTimeLine,
     addEventLinkUser,
     addEventLike,
-    addEventComments
+    addEventComments,
+    addEventShowCategories
 }

@@ -17,35 +17,34 @@ const changeView = async(route) => {
         case '':
         case '#/login':
             {
-                const viewLogin = containerMain.appendChild(components.login());
+                containerMain.appendChild(components.login());
                 window.localStorage.removeItem('iduser'); //Elimina el iduser almacenado en LocalStorage para Asegurarnos que no pueda ingresar al timeline sin loguearse
                 window.localStorage.removeItem('idUserRedirecionar');
                 addEventsLogin();
-                return viewLogin;
+                break;
             }
         case '#/signup':
             {
-                const viewRegistro = containerMain.appendChild(components.signUp());
+                containerMain.appendChild(components.signUp());
                 addEventsRegister();
-                return viewRegistro;
+                break;
             }
 
         case '#/forgetPassword':
             {
-                const viewForgetPassword = containerMain.appendChild(components.forgetPassword());
+                viewForgetPassword = containerMain.appendChild(components.forgetPassword());
                 addEventResetPassword();
-                return viewForgetPassword;
+                break;
             }
         case '#/timeline':
             {
                 const verificar = localStorage.getItem('iduser'); //Aseguramos que no pueda ingresar al timeline sin loguearse
-                if (verificar != null || verificar != undefined) { 
+                if (verificar != null || verificar != undefined) {
                     const viewTimeLine = containerMain.appendChild(components.timeLine());
                     const firstChild = viewTimeLine.firstChild; //Buscamos el primer hijo del viewTimeline
                     viewTimeLine.insertBefore(await components.header(), firstChild); //Agrega al header antes del primer hijo de viewTimelime
                     await loadComponetsTimeLine(); /*Agrega toda la info de fb al Timeline*/
                     loadEventsDomTimeLine(); /*Agrega todos los eventos al Timeline*/
-                    return viewTimeLine;
                 } else {
                     window.location.hash = '#/login';
                     alerts('info', 'Por favor inicie sesion');
@@ -60,7 +59,7 @@ const changeView = async(route) => {
                 viewProfile.insertBefore(await components.header(), firstChild);
                 await loadComponentsProfile(); /*Agrega toda la info de fb al Timeline-profile*/
                 loadEventsDomTimeLine(); /*Agrega todos los eventos del Timeline*/
-                return viewProfile;
+                break;
             }
 
         default:
