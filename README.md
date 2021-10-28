@@ -7,7 +7,7 @@ Si eres autodidacta y estás en constante aprendizaje **CourseShare** ¡te va a 
 
 CourseShare está desarrollada con HTML, CSS, Javascript y Firebase, en donde los usuarios registrados pueden visualizar los posts de otros miembros, incluida una sección sobre post destacados, además pueden realizar publicaciones, editarlos y eliminarlos y buscar algún miembro en específico. El usuario puede asignar a sus publicaciones el modo público o privado y dar like a sus publicaciones favoritas.
 
-Te envitamos a registrarte y probar la funcionalidad de courseShare a traves este [link](https://margazm.github.io/LIM015-social-network/src/).
+Te envitamos a registrarte y probar la funcionalidad de courseShare a traves este [link](https://yovana888.github.io/LIM015-social-network/src/).
 
 
 ## 2. Historias de usuarios :woman: :man:
