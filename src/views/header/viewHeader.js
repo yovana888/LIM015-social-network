@@ -61,5 +61,12 @@ export const header = async () => {
         });
     });
 
+
+    //evento cerrar pestaña
+
+    window.onbeforeunload = function () {
+        window.localStorage.removeItem('idUserRedirecionar');
+    };
+
     return header;
 }
