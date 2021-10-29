@@ -138,14 +138,21 @@ const addEventsModalEdit = async() => {
             const allNameUserPosts = document.querySelectorAll('.nameuser-profile');
             avatarName.textContent = objectUpdatedUser.nameuser;
             avatarDescription.textContent = objectUpdatedUser.description;
+
+            if (changePhotoUser === true) {
+                allImgUserPost.forEach(element => { //renderizamos todas las imagenes del usuario nuevas despues de actualizar
+                    element.src = objectUpdatedUser.photouser;
+                })
+            }
+
+            if (changePhotoCover === true) {
+                allNameUserPosts.forEach(element => { //renderizamos el nuev nombre del usuario despues de actualizar
+                    element.textContent = objectUpdatedUser.nameuser;
+                })
+            }
             changePhotoUser = false;
             changePhotoCover = false;
-            allImgUserPost.forEach(element => { //renderizamos todas las imagenes del usuario nuevas despues de actualizar
-                element.src = objectUpdatedUser.photouser;
-            })
-            allNameUserPosts.forEach(element => { //renderizamos el nuev nombre del usuario despues de actualizar
-                element.textContent = objectUpdatedUser.nameuser;
-            })
+            
             await loadViewHeaderUser();
             formEditProfile.reset();
             modal.classList.remove('revelar');
